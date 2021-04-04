@@ -1,7 +1,8 @@
-import logo from './logo.svg';
+
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { MenuItem, Popover, Menu, Position, Button } from "@blueprintjs/core";
 
 function App() {
 
@@ -9,9 +10,9 @@ function App() {
   const [urls, setUrls] = useState([]);
   const [formValue, setValue] = useState();
 
-  // Get all existing domains
+  // Get all existing domains & urls
   useEffect(() => {
-    console.log('in use effect')
+
     axios.get('/domain')
       .then((response) => {
         console.log(response.data.domains);
@@ -46,16 +47,19 @@ function App() {
         console.log(error);
       });
     }
-    
   }
-  const expandDomain = (domainName) => {
-    let urlsArr = urls.domainName;
-    urlsArr.map((u) => {
-      <h5>{u}</h5>
-    })
-  }
-  const domainsArray = domains.map((m) => {
-    <h2 key={m} onClick={expandDomain(m)}>{m}</h2>
+  const domainsArray = domains && domains.map((m) => {
+    <Popover 
+      content={
+        <Menu>
+          {
+            urls && urls.m && urls.m.map((u) => <MenuItem text={u} />)
+          }
+        </Menu>
+      } 
+      position={Position.RIGHT_TOP}>
+      <Button icon="share" text={m} />
+    </Popover>  
   })
 
   return (
@@ -65,14 +69,13 @@ function App() {
         <div style={{paddingBottom: "50px"}}>
           Domains Registered:
           {domainsArray}
-          {expandDomain}
         </div>
 
-        <form onSubmit={newShortUrl}>
+        <form>
           <label>
             <input type="text" value={formValue} onChange={e => setValue(e.target.value)} />
           </label>
-          <input type="submit" value="Add New short url" />
+          <input type="submit" value="Add New short url" onClick={newShortUrl}/>
         </form>
       </header>
     </div>
