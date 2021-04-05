@@ -59,7 +59,7 @@ function App() {
       } 
       position={Position.RIGHT_TOP}>
       <Button icon="share" text={m} />
-    </Popover>  
+    </Popover>
   })
 
   return (
