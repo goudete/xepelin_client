@@ -4,15 +4,10 @@ import { MenuItem, Popover, Menu, Position, Button } from "@blueprintjs/core";
 
 const Domains = (props) => {
 
-    console.log('in Domain component')
-    console.log('propsdomains:', props.domainsProps)
-    console.log('propsurl:', props.urlsProps)
-
     return (
         <div>
             {props.domainsProps && props.domainsProps.map((m) => {
-                console.log('m', m)
-                console.log(props.urlsProps[m])
+
                 return (
                 <Popover
                   content={

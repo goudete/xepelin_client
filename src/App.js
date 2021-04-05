@@ -1,4 +1,3 @@
-
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -17,16 +16,16 @@ function App() {
   const [formValue, setValue] = useState();
 
   // Get all existing domains & urls
-  // useEffect(() => {
+  useEffect(() => {
 
-  //   axios.get('/domain')
-  //     .then((response) => {
-  //       console.log(response.data.domains);
-  //       let keys = Object.keys(response.data.domains);
-  //       setDomains(keys);
-  //       setUrls(response.data.domains);
-  //     });
-  // });
+    axios.get('/domain')
+      .then((response) => {
+        console.log(response.data.domains);
+        let keys = Object.keys(response.data.domains);
+        setDomains(keys);
+        setUrls(response.data.domains);
+      });
+  });
 
   const newShortUrl = () => {
     if (formValue.substring(0,4) == "http") {
@@ -54,20 +53,6 @@ function App() {
       });
     }
   }
-  // const domainsArray = domains && domains.map((m) => {
-  //   <Popover 
-  //     content={
-  //       <Menu>
-  //         {
-  //           urls && urls.m && urls.m.map((u) => <MenuItem text={u} />)
-  //         }
-  //       </Menu>
-  //     } 
-  //     position={Position.RIGHT_TOP}>
-  //     <Button icon="share" text={m} />
-  //   </Popover>
-  // })
-
   return (
     <div className="App">
 
